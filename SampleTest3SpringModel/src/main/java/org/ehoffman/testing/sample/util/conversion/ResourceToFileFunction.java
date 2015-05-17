@@ -18,37 +18,19 @@
  * #L%
  */
 
-package org.ehoffman.testing.sample.data;
+package org.ehoffman.testing.sample.util.conversion;
 
-public class Person {
+import java.net.URISyntaxException;
 
-    public Person() {
+import com.google.common.base.Function;
+
+public class ResourceToFileFunction implements Function<String, String> {
+        
+    public String apply(String input) {
+        try {
+            return Thread.currentThread().getContextClassLoader().getResource(input).toURI().toString();
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
-    
-    public Person(String firstName, String lastName) {
-        super();
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    private String firstName;
-    
-    private String lastName;
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-    
 }

@@ -24,37 +24,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.net.URISyntaxException;
 
-import org.ehoffman.testing.sample.WebDriverFactory.Driver;
-import org.ehoffman.testing.sample.pages.SimplePage;
+import org.ehoffman.testing.sample.data.Person;
+import org.ehoffman.testing.sample.model.ConcatonatorModel;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class SimpleTest {
 
-    private static String PART1 = "John";
-    private static String PART2 = "Doe";
-
     @Test
     public void simpleWebDriverTest() throws InterruptedException, URISyntaxException {
-        /*
-         * this data, a.k.a. the URL is coupled to this test method, due to being co-located with it. Maybe other tests need it as
-         * well, another reason for a global context.
-         */
-        String url = Thread.currentThread().getContextClassLoader().getResource("index.html").toURI().toString();
-
-        /*
-         * Better we have a parameterized factory and ChromeDriver is not imported,
-         * but the factory details are still visible as an import, so still coupled.
-         */
-        final WebDriver driver = new WebDriverFactory().buildWebdriver(Driver.CHROME, url);
-
-        assertThat(new SimplePage(driver).setInput(PART1, PART2).getOutput()).isEqualTo(PART1 + " " + PART2);
-
-        /*
-         * Notice that without control flow any exception may "leak" and entire browser -- try catch, much like @Before/@After are
-         * not really your friend here.
-         */
-        driver.close();
+        final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring-test-context.xml");
+        ConcatonatorModel model = context.getBean(ConcatonatorModel.class);
+        Person person = context.getBean(Person.class);
+        assertThat(model.concatonate()).isEqualTo(person.getFirstName() + " " + person.getLastName());
+        context.close();
     }
 
 }
