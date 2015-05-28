@@ -15,6 +15,6 @@
         <module>SampleTest1Webdriver</module>
         <module>SampleTest2PageObject</module>
         <module>SampleTest3SpringModel</module>
-        <!-- module>SampleTest4CucumberJVM</module -->
+        <module>SampleTest4CucumberJVM</module>
     </modules>
 </project>    
