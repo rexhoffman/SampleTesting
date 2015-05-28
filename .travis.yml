@@ -1,0 +1,22 @@
+jdk:
+- oraclejdk7
+branches:
+  only:
+  - master
+language: java
+install: true
+before_script:
+- wget http://apache.claz.org/maven/maven-3/3.3.1/binaries/apache-maven-3.3.1-bin.tar.gz
+- tar -zxvf apache-maven-3.3.1-bin.tar.gz
+- chmod +x apache-maven-3.3.1/bin/mvn
+- export PATH=$PWD/apache-maven-3.3.1/bin:${PATH}
+- mvn -q install -DskipTests=true --settings ./.travis/settings.xml
+script: mvn test --settings ./.travis/settings.xml
+after_success:
+- mvn -q deploy --settings ./.travis/settings.xml
+- mvn site -Dsitedeploy --settings ./.travis/settings.xml
+env:
+  global:
+  - SONATYPE_USERNAME=rexhoffman
+  - secure: Ewt7meIsL0VTABzP+eyUzHXZxTyL/hfRCueZbqEeeyt1h3RiQc9jQsw68WjVuxGta08cL0mefczkIGZYqnZmDXO8xcWnFcdvyH3m3G5SiQ6IBfQP++dcTtnnF+JsZaEfmQ/1BILmpLrbDZCxne+BjIBX0eVABTn3NPle1eoC3ss=
+  - secure: Ktvekj5iK9FrvFKWjKR07l5QZlQMXMPkSle+QIUnjzPpetlPo6M+pOJXix4U+0ExGQNxbWeQmAYEtboYlbwylcvSmIRGsL1yuVossB32nIMOk2kUS3bWRjNkHt5Uw8rqDUnHjK2IJ3M0BsgS6rGULTSnP3Rbn9xYadSqmszHUjg=
