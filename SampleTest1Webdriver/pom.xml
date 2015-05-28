@@ -9,6 +9,9 @@
   </parent>
   <artifactId>SampleTest1Webdriver</artifactId>
   <name>${project.artifactId}</name>
+  <properties>
+    <github.site.location>${project.parent.version}/SampleTest1Webdriver</github.site.location>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>

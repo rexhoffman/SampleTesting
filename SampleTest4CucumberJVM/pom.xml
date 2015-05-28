@@ -9,7 +9,7 @@
     <artifactId>SampleTest4CucumberJVM</artifactId>
     <name>${project.artifactId}</name>
     <properties>
-        <plugin.maven.java.version>1.8</plugin.maven.java.version>
+        <github.site.location>${project.parent.version}/SampleTest4CucumberJVM</github.site.location>
     </properties>
     <dependencies>
         <dependency>

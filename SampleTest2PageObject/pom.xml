@@ -8,6 +8,9 @@
     </parent>
     <artifactId>SampleTest2PageObject</artifactId>
     <name>${project.artifactId}</name>
+    <properties>
+        <github.site.location>${project.parent.version}/SampleTest2PageObject</github.site.location>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>commons-codec</groupId>

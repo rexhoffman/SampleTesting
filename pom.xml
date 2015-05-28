@@ -17,4 +17,11 @@
         <module>SampleTest3SpringModel</module>
         <module>SampleTest4CucumberJVM</module>
     </modules>
-</project>    
+    <properties>
+        <github.global.server>github</github.global.server>
+        <github.owner>rexhoffman</github.owner>
+        <github.project>SampleTestinging</github.project>
+        <github.site.location>${project.version}/</github.site.location>
+        <plugin.maven.java.version>1.8</plugin.maven.java.version>
+    </properties>
+</project>

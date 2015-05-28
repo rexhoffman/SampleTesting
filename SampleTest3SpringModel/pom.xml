@@ -8,6 +8,9 @@
     </parent>
     <artifactId>SampleTest3SpringModel</artifactId>
     <name>${project.artifactId}</name>
+    <properties>
+        <github.site.location>${project.parent.version}/SampleTest3SpringModel</github.site.location>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>commons-codec</groupId>
