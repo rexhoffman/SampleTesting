@@ -28,6 +28,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
 public class SimpleTest {
 
@@ -48,7 +49,8 @@ public class SimpleTest {
          * naively relying on the test runner threading model, or explicitly with a pool managed in the context of a global test
          * run.
          */
-        final WebDriver driver = new ChromeDriver();
+        String browser = System.getProperty("BROWSER");
+        final WebDriver driver = "PHANTOMJS".equals(browser) ? new PhantomJSDriver() : new ChromeDriver();
 
         driver.navigate().to(url);
 

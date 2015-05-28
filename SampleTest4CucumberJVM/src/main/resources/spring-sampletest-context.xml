@@ -9,6 +9,17 @@
                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
                        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"> 
    
+   <bean id="propertyPlaceholderConfigurer"   
+      class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
+      <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+      <property name="searchSystemEnvironment" value="true" />
+      <property name="properties">
+         <props>
+            <prop key="BROWSER">CHROME</prop>
+         </props>
+      </property>
+   </bean>
+   
    <bean id="person" class="org.ehoffman.testing.sample.data.Person" p:firstName="John" p:lastName="Doe" scope="cucumber-glue">
       <aop:scoped-proxy/>
    </bean>
@@ -20,7 +31,7 @@
    <bean id="webDriverFactory" class="org.ehoffman.testing.sample.WebDriverFactory"/>
    
    <bean id="webDriver" factory-bean="webDriverFactory" factory-method="buildWebdriver" destroy-method="close" scope="cucumber-glue">
-     <constructor-arg index="0" value="FIREFOX"/>
+     <constructor-arg index="0" value="${BROWSER}"/>
      <constructor-arg index="1" type="java.lang.String" ref="url"/>
      <aop:scoped-proxy/>
    </bean>

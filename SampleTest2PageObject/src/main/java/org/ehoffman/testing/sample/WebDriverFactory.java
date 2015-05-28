@@ -25,11 +25,12 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
 public class WebDriverFactory {
 
     public enum Driver {
-        CHROME, FIREFOX
+        CHROME, FIREFOX, PHANTOMJS
     }
 
     /**
@@ -45,8 +46,11 @@ public class WebDriverFactory {
                 driver = new ChromeDriver();
                 break;
             case FIREFOX:
-            default:
                 driver = new FirefoxDriver();
+                break;
+            case PHANTOMJS:
+            default:
+                driver = new PhantomJSDriver();
                 break;
         }
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.NANOSECONDS);

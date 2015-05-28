@@ -7,6 +7,17 @@
    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"> 
    
+   <bean id="propertyPlaceholderConfigurer"   
+      class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
+      <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+      <property name="searchSystemEnvironment" value="true" />
+      <property name="properties">
+         <props>
+            <prop key="BROWSER">CHROME</prop>
+         </props>
+      </property>
+   </bean>
+   
    <bean id="person" class="org.ehoffman.testing.sample.data.Person" p:firstName="John" p:lastName="Doe"/>
    
    <bean id="resourceToFileString" class="org.ehoffman.testing.sample.util.conversion.ResourceToFileFunction"/>
@@ -16,7 +27,7 @@
    <bean id="webDriverFactory" class="org.ehoffman.testing.sample.WebDriverFactory"/>
    
    <bean id="webDriver" factory-bean="webDriverFactory" factory-method="buildWebdriver" destroy-method="close">
-     <constructor-arg index="0" value="FIREFOX"/>
+     <constructor-arg index="0" value="${BROWSER}"/>
      <constructor-arg index="1" type="java.lang.String" ref="url"/>
    </bean>
 

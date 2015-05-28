@@ -45,7 +45,12 @@ public class SimpleTest {
          * Better we have a parameterized factory and ChromeDriver is not imported,
          * but the factory details are still visible as an import, so still coupled.
          */
-        final WebDriver driver = new WebDriverFactory().buildWebdriver(Driver.CHROME, url);
+        Driver driverType = Driver.CHROME; 
+        String name = System.getProperty("BROWSER");
+        if (name != null) {
+            driverType = Driver.valueOf(System.getProperty("BROWSER"));
+        }
+        final WebDriver driver = new WebDriverFactory().buildWebdriver(driverType, url);
 
         assertThat(new SimplePage(driver).setInput(PART1, PART2).getOutput()).isEqualTo(PART1 + " " + PART2);
 
