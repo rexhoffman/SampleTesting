@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:util="http://www.springframework.org/schema/util"
+   xmlns:aop="http://www.springframework.org/schema/aop"
+   xmlns:p="http://www.springframework.org/schema/p"
+   xmlns:c="http://www.springframework.org/schema/c"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+                       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"> 
+   
+   <bean id="person" class="org.ehoffman.testing.sample.data.Person" p:firstName="John" p:lastName="Doe" scope="cucumber-glue">
+      <aop:scoped-proxy/>
+   </bean>
+   
+   <bean id="resourceToFileString" class="org.ehoffman.testing.sample.util.conversion.ResourceToFileFunction"/>
+   
+   <bean id="url" factory-bean="resourceToFileString" factory-method="apply" c:input="undertest/index.html"/>
+   
+   <bean id="webDriverFactory" class="org.ehoffman.testing.sample.WebDriverFactory"/>
+   
+   <bean id="webDriver" factory-bean="webDriverFactory" factory-method="buildWebdriver" destroy-method="close" scope="cucumber-glue">
+     <constructor-arg index="0" value="FIREFOX"/>
+     <constructor-arg index="1" type="java.lang.String" ref="url"/>
+     <aop:scoped-proxy/>
+   </bean>
+
+   <bean id="concatonatorModel" class="org.ehoffman.testing.sample.model.ConcatonatorModel" c:driver-ref="webDriver" c:person-ref="person"/>
+   
+</beans>
