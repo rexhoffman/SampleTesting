@@ -10,7 +10,7 @@ before_script:
 - tar -zxvf apache-maven-3.3.1-bin.tar.gz
 - chmod +x apache-maven-3.3.1/bin/mvn
 - export PATH=$PWD/apache-maven-3.3.1/bin:${PATH}
-- mvn -q install -DskipTests=true --settings ./.travis/settings.xml
+- mvn -e install -DskipTests=true --settings ./.travis/settings.xml
 script: mvn test --settings ./.travis/settings.xml
 after_success:
 - mvn site -Dsitedeploy --settings ./.travis/settings.xml
