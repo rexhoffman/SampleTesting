@@ -13,7 +13,7 @@ before_script:
 - mvn -q install -DskipTests=true --settings ./.travis/settings.xml
 script: mvn test --settings ./.travis/settings.xml -DBROWSER=PHANTOMJS
 after_success:
-- mvn site -Dsitedeploy --settings ./.travis/settings.xml -DBROWSER=PHANTOMJS
+- mvn site -Psite-deploy  --settings ./.travis/settings.xml -DBROWSER=PHANTOMJS
 env:
   global:
   - SONATYPE_USERNAME=rexhoffman

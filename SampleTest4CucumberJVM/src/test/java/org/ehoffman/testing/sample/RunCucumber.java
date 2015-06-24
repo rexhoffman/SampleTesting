@@ -29,6 +29,6 @@ import cucumber.api.junit.Cucumber;
 @CucumberOptions(
     plugin = {"pretty", "html:target/cucumber"},
     glue = { "org.ehoffman.testing.sample.stepdefs" },
-    features = { "classpath:features/sample.features" })
+    features = { "classpath:features/sample.feature" })
 public class RunCucumber {
 }

@@ -38,13 +38,13 @@ public class SimpleTest {
     @Test
     public void simpleWebDriverTest() throws InterruptedException, URISyntaxException {
         /*
-         * this data, aka the url is coupled to this test method, do to be co-located with it. Maybe other tests need it as well,
+         * this data, aka the url is coupled to this test method, do to being co-located with it. Maybe other tests need it as well,
          * another reason for a global context.
          */
         String url = Thread.currentThread().getContextClassLoader().getResource("index.html").toURI().toString();
 
         /*
-         * not the lack of variability in starting the browser, clearly a method is need. Note as well that there is also global
+         * note the lack of variability in starting the browser, clearly a method is need. Note as well ,that there is also global
          * state around how many browser happen to be open in a multi-threaded run. this can be achieved in a number of ways,
          * naively relying on the test runner threading model, or explicitly with a pool managed in the context of a global test
          * run.
@@ -58,7 +58,7 @@ public class SimpleTest {
         driver.findElement(By.name("part2")).sendKeys(PART2);
 
         /*
-         * A little experience will show you that this below line can fail, it is in a race condition with the javascript + any
+         * A little experience will show you that the line below can fail, it is in a race condition with the javascript + any
          * server side it might call. Web driver waits are the answer.
          */
         assertThat(driver.findElement(By.name("output")).getAttribute("value")).isEqualTo(PART1 + " " + PART2);
