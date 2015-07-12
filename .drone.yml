@@ -1,4 +1,4 @@
-image: java8
+image: oraclejdk8
 git:
   path: github.com/rexhoffman/SampleTesting
 script:
