@@ -1,0 +1,19 @@
+image: java8
+git:
+  path: github.com/rexhoffman/SampleTesting
+script:
+  - wget http://apache.claz.org/maven/maven-3/3.3.1/binaries/apache-maven-3.3.1-bin.tar.gz
+  - tar -zxvf apache-maven-3.3.1-bin.tar.gz
+  - chmod +x apache-maven-3.3.1/bin/mvn
+  - export PATH=$PWD/apache-maven-3.3.1/bin:${PATH}
+  - mvn -q install -DskipTests=true --settings ./.travis/settings.xml
+notify:
+  email:
+    recipients:
+      - rex@e-hoffman.org
+  webhook:
+    urls:
+      - https://webhooks.gitter.im/e/$$GITTER_KEY
+    on_started: false
+    on_success: true
+    on_failure: true
